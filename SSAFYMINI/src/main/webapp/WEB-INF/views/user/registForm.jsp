@@ -20,16 +20,21 @@ input::-webkit-inner-spin-button {
 </head>
 <body>
 	<%@ include file="../include/header.jsp" %>
+	<script>
+		
+	
+	</script>
 	<div class="regist">
 		<form action="registUser" method="post"> 
 		<div class="input-group mb-3">
 	 		<span class="input-group-text" id="basic-addon1">아이디</span>
 	 		<input type="text" name="id" class="form-control" placeholder="아이디" aria-label="Username" aria-describedby="basic-addon1">
+	 		<span class="input-group-text" id="idCheck">아이디 중복 검사</span>
 		</div>
 		
 		<div class="input-group mb-3">
 	 		<span class="input-group-text" id="basic-addon1">비밀번호</span>
-	 		<input type="password" name="password" class="form-control" placeholder="비밀번호" aria-label="Username" aria-describedby="basic-addon1">
+	 		<input type="password" name="password" class="form-control" placeholder="비밀번호는 대,소문자와 숫자, 특수문자를 포함하여 생성해주세요" aria-label="Username" aria-describedby="basic-addon1">
 		</div>
 		
 		<div class="input-group mb-3">

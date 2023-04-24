@@ -7,9 +7,10 @@ public class User {
 	private String name;
 	private String emailFirst;
 	private String emailLast;
+	private String email;
 	private int age;
 	private char gender;
-	private int phone;
+	private String phone;
 	private int year;
 	private int month;
 	private int day;
@@ -19,15 +20,16 @@ public class User {
 	public User() {
 		super();
 	}
-	
-	public User(String id, String password, String name, String emailFirst, String emailLast, int age, char gender,
-			int phone, int year, int month, int day, String grade, String createTime) {
+
+	public User(String id, String password, String name, String emailFirst, String emailLast, String email, int age,
+			char gender, String phone, int year, int month, int day, String grade, String createTime) {
 		super();
 		this.id = id;
 		this.password = password;
 		this.name = name;
 		this.emailFirst = emailFirst;
 		this.emailLast = emailLast;
+		this.email = email;
 		this.age = age;
 		this.gender = gender;
 		this.phone = phone;
@@ -37,7 +39,9 @@ public class User {
 		this.grade = grade;
 		this.createTime = createTime;
 	}
-	
+
+
+
 	public String getId() {
 		return id;
 	}
@@ -68,6 +72,12 @@ public class User {
 	public void setEmailLast(String emailLast) {
 		this.emailLast = emailLast;
 	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public int getAge() {
 		return age;
 	}
@@ -80,10 +90,10 @@ public class User {
 	public void setGender(char gender) {
 		this.gender = gender;
 	}
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public int getYear() {

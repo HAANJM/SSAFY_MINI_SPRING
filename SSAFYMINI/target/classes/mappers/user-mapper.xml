@@ -3,4 +3,27 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.mini.model.dao.UserDao">
 
+	<insert id="insertUser" parameterType="User">
+		INSERT 
+		  INTO 
+				USERS
+				(ID,
+				PASSWORD,
+				NAME,
+				EMAIL,
+				AGE,
+				GENDER,
+				PHONE,
+				BIRTH)
+		VALUES
+				(#{id},
+				#{password},
+				#{name},
+				#{email},
+				#{age},
+				#{gender},
+				#{phone},
+				CONCAT(${year}, ${month}, ${day}))
+	</insert>
+
 </mapper>
