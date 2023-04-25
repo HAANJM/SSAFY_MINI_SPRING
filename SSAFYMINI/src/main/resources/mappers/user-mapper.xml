@@ -25,5 +25,21 @@
 				#{phone},
 				CONCAT(${year}, ${month}, ${day}))
 	</insert>
+	
+	<select id="selectOne" parameterType="String" resultType="User">
+		SELECT
+				ID,
+				PASSWORD,
+				NAME,
+				EMAIL,
+				GENDER,
+				PHONE,
+				GRADE,
+				CREATETIME
+		  FROM
+		  		USERS
+		 WHERE
+		 		ID = #{id}
+	</select> 
 
 </mapper>

@@ -2,20 +2,20 @@ package com.ssafy.mini.model.dto;
 
 public class User {
 	
-	private String id;
-	private String password;
-	private String name;
-	private String emailFirst;
-	private String emailLast;
-	private String email;
-	private int age;
-	private char gender;
-	private String phone;
-	private int year;
-	private int month;
-	private int day;
-	private String grade;
-	private String createTime;
+	private String id; // 아이디
+	private String password; // 비밀번호
+	private String name; // 이름
+	private String emailFirst; // 이메일 - 아이디부분
+	private String emailLast; // 이메일 - 도메인부분
+	private String email; // 이메일 합친 것
+	private int age; // 나이
+	private char gender; // 성별 ('F', 'M'과 같은 형식으로 입력하기 위해 char형
+	private String phone; // 전화번호
+	private int year; // 생년월일의 년도
+	private int month; // 생년월일의 달
+	private int day; // 생년월일의 일
+	private String grade; // 회원 등급
+	private String createTime; // 회원 생성 일자 (DB에서 default로 가입 시의 날짜를 입력)
 	
 	public User() {
 		super();

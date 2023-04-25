@@ -55,7 +55,7 @@ input::-webkit-inner-spin-button {
 		    <option value="F">여성</option>
 		  </select>
 		</div>
-	
+		
 		<div class="input-group mb-3">
 			<span class="input-group-text" id="basic-addon1">이메일</span>
 		 	<input type="text" name="emailFirst" class="form-control" placeholder="이메일" aria-label="Recipient's username" aria-describedby="basic-addon2">

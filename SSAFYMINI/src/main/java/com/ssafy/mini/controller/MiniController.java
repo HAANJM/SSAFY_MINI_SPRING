@@ -1,5 +1,7 @@
 package com.ssafy.mini.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,9 +36,21 @@ public class MiniController {
 	}
 	
 	@PostMapping("login")
-	public String dologin(User user) {
+	public String dologin(User user, Model model, HttpSession session) {
 		
-		return null;
+		user.setPassword(encrypt.getEncrypt(user.getPassword()));
+
+		User loginUser = userService.selectOne(user.getId());
+		
+		if(loginUser != null && loginUser.getPassword().equals(user.getPassword())) {
+			session.setAttribute("loginUser", loginUser);
+			model.addAttribute("msg", "로그인 성공");
+			return "redirect:/";
+		}else {
+			model.addAttribute("msg", "다시 시도해주세요.");
+			return "/index";
+		}
+		
 		
 	}
 	
@@ -94,6 +108,12 @@ public class MiniController {
 	@GetMapping("myPage")
 	public String myPage() {
 		return "user/myPage";
+	}
+	
+	@GetMapping("logout")
+	public String doLogout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
 	}
 
 }

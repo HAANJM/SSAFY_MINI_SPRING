@@ -9,5 +9,7 @@ public interface UserService {
 	List<User> selectAll();
 	
 	int insertUser(User user);
+	
+	User selectOne(String id);
 
 }
