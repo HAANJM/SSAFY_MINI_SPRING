@@ -49,7 +49,7 @@ input::-webkit-inner-spin-button {
 		
 		<div class="input-group mb-3">
 		  <label class="input-group-text" for="inputGroupSelect01">성별</label>
-		  <select class="form-select" id="inputGroupSelect01">
+		  <select class="form-select" id="inputGroupSelect01" name="gender">
 		    <option selected>성별</option>
 		    <option value="M">남성</option>
 		    <option value="F">여성</option>
