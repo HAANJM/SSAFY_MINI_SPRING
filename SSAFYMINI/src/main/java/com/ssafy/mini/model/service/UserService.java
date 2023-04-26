@@ -1,10 +1,10 @@
-package com.ssafy.mini.model.dao;
+package com.ssafy.mini.model.service;
 
 import java.util.List;
 
 import com.ssafy.mini.model.dto.User;
 
-public interface UserDao {
+public interface UserService {
 	
 	List<User> selectAll();
 	
