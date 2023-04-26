@@ -115,5 +115,46 @@ public class MiniController {
 		session.invalidate();
 		return "redirect:/";
 	}
+	
+	@PostMapping("deleteUser")
+	public String doDeleteUser(boolean deleteCheck, String deletePass, String deletePassCheck, HttpSession session, Model model) {
+		
+		// 원래는 자바스크립트로 일차적인 검사를 하고 넘어와야하는데
+		// 자바스크립트로 하지 않아서 이것저것 파라미터를 많이 들고왔다
+		
+		User loginUser = (User) session.getAttribute("loginUser");
+		
+		// 로그인유저가 널이면 잘못된 접근
+		if(loginUser == null) {
+			model.addAttribute("msg", "잘못댐!!!");
+			return "redirect:/";
+		}
+		
+		// 비밀번호와 비밀번호 재확인이 틀리면 안댐
+		if(!deletePass.equals(deletePassCheck)) {
+			model.addAttribute("msg", "비밀번호가 일치하지 않음!!");
+			return "redirect:/";
+		}
+		
+		// DB의 회원 비밀번호와 비교하기 위해 deletePass를 암호화한다
+		
+		deletePass = encrypt.getEncrypt(deletePass);
+		
+		if(!deletePass.equals(loginUser.getPassword())) {
+			model.addAttribute("msg", "비밀번호가 일치하지 않음!!");
+			return "redirect:/";
+		}
+		
+		int result = userService.deleteUser(loginUser.getId());
+		
+		if(result > 0) {
+			model.addAttribute("msg", "정상적으로 탈퇴되었습니다!!!");
+			return "redirect:/";
+		}else {
+			model.addAttribute("msg", "뭔가 이상한데요? 아무튼 안된거같음...");
+			return "redirect:/";
+		}
+		
+	}
 
 }
