@@ -172,13 +172,13 @@ public class MiniController {
 		
 		// 0. 수신자 설정
 		// 랜덤 변수를 만들어서 발생시키고 싶다면 생성하고 반환한다
-		String recipient = "haanwhy@gmail.com";
+		String recipient = "ssafy@gmail.com";
         String code = "abc";
         int randomCode = (int)((Math.random() + 1) * 100000 ); // 랜덤 여섯자리 숫자
  
         // 1. 발신자의 메일 계정과 비밀번호 설정
-        final String user = "onerosen@naver.com";
-        final String password = "wkdalse64@";
+        final String user = "ssafy@naver.com";
+        final String password = "****";
  
         // 2. Property에 SMTP 서버 정보 설정
         Properties prop = new Properties();
