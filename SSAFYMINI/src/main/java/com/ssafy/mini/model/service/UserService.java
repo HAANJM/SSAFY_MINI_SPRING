@@ -12,4 +12,6 @@ public interface UserService {
 	
 	User selectOne(String id);
 
+	int deleteUser(String id);
+
 }

@@ -41,5 +41,13 @@
 		 WHERE
 		 		ID = #{id}
 	</select> 
+	
+	<delete id="deleteUser" parameterType="String">
+		DELETE
+		  FROM
+		  		USERS
+		 WHERE
+		 		ID = #{id}
+	</delete>
 
 </mapper>

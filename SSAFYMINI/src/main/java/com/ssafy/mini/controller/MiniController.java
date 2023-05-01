@@ -1,5 +1,15 @@
 package com.ssafy.mini.controller;
 
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,6 +124,106 @@ public class MiniController {
 	public String doLogout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
+	}
+	
+	@PostMapping("deleteUser")
+	public String doDeleteUser(boolean deleteCheck, String deletePass, String deletePassCheck, HttpSession session, Model model) {
+		
+		// 원래는 자바스크립트로 일차적인 검사를 하고 넘어와야하는데
+		// 자바스크립트로 하지 않아서 이것저것 파라미터를 많이 들고왔다
+		
+		User loginUser = (User) session.getAttribute("loginUser");
+		
+		// 로그인유저가 널이면 잘못된 접근
+		if(loginUser == null) {
+			model.addAttribute("msg", "잘못댐!!!");
+			return "redirect:/";
+		}
+		
+		// 비밀번호와 비밀번호 재확인이 틀리면 안댐
+		if(!deletePass.equals(deletePassCheck)) {
+			model.addAttribute("msg", "비밀번호가 일치하지 않음!!");
+			return "redirect:/";
+		}
+		
+		// DB의 회원 비밀번호와 비교하기 위해 deletePass를 암호화한다
+		
+		deletePass = encrypt.getEncrypt(deletePass);
+		
+		if(!deletePass.equals(loginUser.getPassword())) {
+			model.addAttribute("msg", "비밀번호가 일치하지 않음!!");
+			return "redirect:/";
+		}
+		
+		int result = userService.deleteUser(loginUser.getId());
+		
+		if(result > 0) {
+			model.addAttribute("msg", "정상적으로 탈퇴되었습니다!!!");
+			return "redirect:/";
+		}else {
+			model.addAttribute("msg", "뭔가 이상한데요? 아무튼 안된거같음...");
+			return "redirect:/";
+		}
+		
+	}
+	
+	@GetMapping("sendEmail")
+	public String sendEmail(Model model) {
+		
+		// 0. 수신자 설정
+		// 랜덤 변수를 만들어서 발생시키고 싶다면 생성하고 반환한다
+		String recipient = "ssafy@gmail.com";
+        String code = "abc";
+        int randomCode = (int)((Math.random() + 1) * 100000 ); // 랜덤 여섯자리 숫자
+ 
+        // 1. 발신자의 메일 계정과 비밀번호 설정
+        final String user = "ssafy@naver.com";
+        final String password = "****";
+ 
+        // 2. Property에 SMTP 서버 정보 설정
+        Properties prop = new Properties();
+        prop.put("mail.smtp.host", "smtp.naver.com");
+        prop.put("mail.smtp.port", 587); // 발신자 메일이 네이버일때 587 구글 465
+        prop.put("mail.smtp.auth", "true");
+        // 발신자 메일이 네이버일때는 아래 두 줄을 포함시키면 안된다
+        // 발신자 메일이 구글일때는 아래 두 줄을 포함시켜야한다!
+//        prop.put("mail.smtp.ssl.enable", "true");
+//        prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+ 
+        // 3. SMTP 서버정보와 사용자 정보를 기반으로 Session 클래스의 인스턴스 생성
+        Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(user, password);
+            }
+        });
+ 
+        // 4. Message 클래스의 객체를 사용하여 수신자와 내용, 제목의 메시지를 작성한다.
+        // 5. Transport 클래스를 사용하여 작성한 메세지를 전달한다.
+ 
+        MimeMessage message = new MimeMessage(session);
+        try {
+            message.setFrom(new InternetAddress(user));
+ 
+            // 수신자 메일 주소
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+ 
+            // Subject(제목)
+            message.setSubject("SSAFY 9기 5반입니다..");
+ 
+            // Text(본문)
+            message.setText("사실 코드 테스트용 메일이지롱~ : " + randomCode);
+ 
+            Transport.send(message);    // send message
+            model.addAttribute("msg", "이메일 발송 성공!");
+ 
+        } catch (AddressException e) {
+            e.printStackTrace();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+		
+        return "/index";
+		
 	}
 
 }

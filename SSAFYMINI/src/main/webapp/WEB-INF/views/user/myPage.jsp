@@ -48,8 +48,23 @@
 				<td>${loginUser.createTime}</td>
 			</tr>
 		</tbody>
-	
 	</table>
+	
+	<a href="updateForm">개인정보 수정</a>
+	
+	<hr>
+	<h2>회원 탈퇴</h2>
+	<h5>회원탈퇴하시려면 약정 체크하고 비밀번호 두 번 입력해주세여~</h5>
+	<form action="deleteUser" method="POST">
+		<label for="deleteCheck">어쩌구 저쩌구 약정에 동의하십니까? 동의하시면 체크해주삼~</label>
+		<input type="checkbox" name="deleteCheck">
+		<label for="deletePass">비밀번호</label>
+		<input type="password" name="deletePass">
+		<label for="deletePassCheck">비밀번호 재확인</label>
+		<input type="password" name="deletePassCheck">
+		<input type="submit">
+	</form>
+	
 
 </body>
 </html>
