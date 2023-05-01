@@ -25,7 +25,7 @@ input::-webkit-inner-spin-button {
 	
 	</script>
 	<div class="regist">
-		<form action="registUser" method="post"> 
+		<form method="post" id="registForm" onsubmit="return false;"> 
 		<div class="input-group mb-3">
 	 		<span class="input-group-text" id="basic-addon1">아이디</span>
 	 		<input type="text" name="id" class="form-control" placeholder="아이디" aria-label="Username" aria-describedby="basic-addon1">
@@ -34,12 +34,12 @@ input::-webkit-inner-spin-button {
 		
 		<div class="input-group mb-3">
 	 		<span class="input-group-text" id="basic-addon1">비밀번호</span>
-	 		<input type="password" name="password" class="form-control" placeholder="비밀번호는 대,소문자와 숫자, 특수문자를 포함하여 생성해주세요" aria-label="Username" aria-describedby="basic-addon1">
+	 		<input type="password" id="passFirst" name="password" class="form-control" placeholder="비밀번호는 대,소문자와 숫자, 특수문자를 포함하여 생성해주세요" aria-label="Username" aria-describedby="basic-addon1">
 		</div>
 		
 		<div class="input-group mb-3">
 	 		<span class="input-group-text" id="basic-addon1">비밀번호 확인</span>
-	 		<input type="password" name="checkPassword" class="form-control" placeholder="비밀번호 확인" aria-label="Username" aria-describedby="basic-addon1">
+	 		<input type="password" id="passSecond" name="checkPassword" class="form-control" placeholder="비밀번호 확인" aria-label="Username" aria-describedby="basic-addon1">
 		</div>
 		
 		<div class="input-group mb-3">
@@ -94,10 +94,64 @@ input::-webkit-inner-spin-button {
 	 		<input type="number" name="day" placeholder="일" min="1" max="31" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
 		</div>
 		<div>
-			<input type="submit" class="btn btn-success" value="회원 가입">
+			<input type="submit" id="registBtn" class="btn btn-success" value="회원 가입">
 		</div>
 		</form>
 	</div>	
+	
+	<div>
+		<div>
+			비밀번호 일치 여부 : <h6 id="passCheckFirst"></h6>
+		</div>
+		<div>
+			비밀번호 양식 일치 여부 : <h6 id="passCheckSecond"></h6>
+		</div>
+		
+	</div>
+
+	<script>
+		
+		window.addEventListener("keyup", (e) => {
+			// 비밀번호 재확인 일치 여부
+			let passFirst = document.getElementById("passFirst").value;
+			let passSecond = document.getElementById("passSecond").value;
+
+			let checkFirst = document.getElementById("passCheckFirst");
+			let checkSecond = document.getElementById("passCheckSecond");
+
+			if(passFirst == passSecond){
+				checkFirst.innerText = "일치함!!!!";
+			}
+			else{
+				checkFirst.innerText = "일치안함!!!!";
+			};
+
+			// 비밀번호가 양식에 맞는지 여부
+			const regex = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,16})/;
+
+			if(regex.test(passFirst)){
+				checkSecond.innerText = "비밀번호 보안 높음";
+			}
+			else{
+				checkSecond.innerText = "비밀번호 보안 약함";
+			}
+
+			let registForm = document.querySelector("#registForm");
+			let registBtn = document.querySelector("#registBtn");
+
+			if(passFirst == passSecond && regex.test(passFirst)){
+				registForm.setAttribute('action', 'registUser');
+			}
+			else{
+				registBtn.addEventListener("click", ()=>{
+					alert("비밀번호 제대로 입력해봐요~");
+				});
+				return false;
+			}
+
+		});
+
+	</script>
 
 </body>
 </html>
