@@ -70,7 +70,7 @@ input::-webkit-inner-spin-button {
 		
 		<div class="input-group mb-3">
 	 		<span class="input-group-text" id="basic-addon1">전화번호</span>
-	 		<input type="number" name="phone" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+	 		<input type="text" id="phoneVal" name="phone" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
 		</div>
 		
 		<div class="input-group mb-1">
@@ -106,6 +106,9 @@ input::-webkit-inner-spin-button {
 		<div>
 			비밀번호 양식 일치 여부 : <h6 id="passCheckSecond"></h6>
 		</div>
+		<div>
+			전화번호 양식 일치 여부 : <h6 id="phoneCheck"></h6>
+		</div>
 		
 	</div>
 
@@ -136,6 +139,18 @@ input::-webkit-inner-spin-button {
 				checkSecond.innerText = "비밀번호 보안 약함";
 			}
 
+			const regexPhone = /^(\d{3})(\d{4})(\d{4})$/;
+
+			const phone = document.getElementById("phoneVal").value;
+			let phoneCheck = document.getElementById("phoneCheck");
+
+			if(regexPhone.test(phone)){
+				phoneCheck.innerText = "전화번호 양식 대충맞음~";
+			}
+			else{
+				phoneCheck.innerText = "아 안맞다고";
+			}
+
 			let registForm = document.querySelector("#registForm");
 			let registBtn = document.querySelector("#registBtn");
 
@@ -148,6 +163,9 @@ input::-webkit-inner-spin-button {
 				});
 				return false;
 			}
+			
+
+
 
 		});
 
