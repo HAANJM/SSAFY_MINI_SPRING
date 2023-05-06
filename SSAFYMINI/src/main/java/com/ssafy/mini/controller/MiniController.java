@@ -225,5 +225,12 @@ public class MiniController {
         return "/index";
 		
 	}
+	
+	@GetMapping("list")
+	public String getBoardList() {
+		
+		return null;
+		
+	}
 
 }
