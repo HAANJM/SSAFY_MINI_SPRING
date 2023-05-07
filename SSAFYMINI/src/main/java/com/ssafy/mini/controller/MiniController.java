@@ -1,5 +1,6 @@
 package com.ssafy.mini.controller;
 
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -18,7 +19,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.ssafy.mini.model.dto.Board;
 import com.ssafy.mini.model.dto.User;
+import com.ssafy.mini.model.service.BoardService;
 import com.ssafy.mini.model.service.UserService;
 import com.ssafy.mini.util.Encrypt;
 import com.ssafy.mini.util.RegistCheck;
@@ -34,6 +37,9 @@ public class MiniController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private BoardService boardService;
 	
 	@GetMapping({"/", "index"})
 	public String showIndex() {
@@ -227,9 +233,13 @@ public class MiniController {
 	}
 	
 	@GetMapping("list")
-	public String getBoardList() {
+	public String getBoardList(Model model) {
 		
-		return null;
+		List<Board> boardList = boardService.selectBoardList();
+		
+		model.addAttribute("boardList", boardList);
+		
+		return "list";
 		
 	}
 
