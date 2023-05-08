@@ -242,5 +242,20 @@ public class MiniController {
 		return "list";
 		
 	}
+	
+	@PostMapping("boardEnroll")
+	public String doEnroll(Board board, Model model) {
+		
+		int result = boardService.insertBoard(board);
+		
+		if(result > 0) {
+			model.addAttribute("board", board);
+			return "boardDetail";
+		}else {
+			model.addAttribute("msg", "error");
+			return "index";
+		}
+		
+	}
 
 }

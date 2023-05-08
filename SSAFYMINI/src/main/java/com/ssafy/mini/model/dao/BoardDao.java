@@ -7,5 +7,7 @@ import com.ssafy.mini.model.dto.Board;
 public interface BoardDao {
 	
 	List<Board> selectBoardList();
+	
+	int insertBoard(Board board);
 
 }
