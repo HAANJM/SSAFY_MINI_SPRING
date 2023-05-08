@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,13 +23,15 @@
 			<th>조회수</th>
 		</thead>
 		<tbody>
+		<c:forEach var="board" items="${list}">
 			<tr>
-				<td>번호</td>
-				<td>제목</td>
-				<td>작성자</td>
-				<td>날짜</td>
-				<td>조회수</td>
+				<td>${board.boardNo}</td>
+				<td>${board.title}</td>
+				<td>${board.writer}</td>
+				<td>${board.createDate}</td>
+				<td>${board.viewCount}</td>
 			</tr>
+		</c:forEach>
 		</tbody>
 	</table>
 

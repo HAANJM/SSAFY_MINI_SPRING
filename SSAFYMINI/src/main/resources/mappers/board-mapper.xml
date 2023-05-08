@@ -3,5 +3,11 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.mini.model.dao.BoardDao">
 
+	<select id="selectBoardList" resultType="Board">
+		SELECT *
+		FROM BOARDS
+		ORDER BY BOARDNO DESC
+	</select>
+
 
 </mapper>
