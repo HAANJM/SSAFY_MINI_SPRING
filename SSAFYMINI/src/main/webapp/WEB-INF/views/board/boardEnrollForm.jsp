@@ -11,9 +11,12 @@
 	<%@ include file="../include/header.jsp" %>
 	
 	<form action="boardEnroll" method="POST">
-		<input type="text" name="title">
-		<input type="text" name="writer">
-		<textarea name="content"></textarea>
+		<label for="title">제목</label>
+		<input type="text" id="title" name="title"> <br>
+		<label for="writer">작성자</label>
+		<input type="text" id="writer" name="writer"> <br>
+		<label for="content">본문</label>
+		<textarea id="writer" name="content"></textarea> <br>
 		<input type="submit">
 	</form>
 
