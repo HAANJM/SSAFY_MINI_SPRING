@@ -17,6 +17,8 @@
 - 회원가입 / 로그인 암호화 / 복호화 : 230402 (https://www.notion.so/8537c606a29449d28c547942e92edb22)
 - 자바를 이용한 회원가입 정규표현식 유효성 검사 : https://www.notion.so/6bfd8c7940ce440fa38ac6ad2908ad4a
 - 자바로 메일 보내기(구글, 네이버) : https://smart-mask-d7a.notion.site/a880b13b938e4266b2be95e054feecf2
+- spring legacy 프로젝트를 spring boot로 변환
+- spring boot 프로젝트를 RESTFUL하게 변환
 
 ---
 작성자
